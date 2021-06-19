@@ -1,0 +1,42 @@
+<div *ngIf="user">
+<mat-card>
+  <mat-card-header >
+    <mat-card-title>Keep</mat-card-title>
+    <mat-card-subtitle>Live, Plan & Organize</mat-card-subtitle>
+  </mat-card-header>
+    <mat-card-content>
+      <form >
+        <h2>Sign in</h2>  
+        <mat-error *ngIf="loginInvalid">
+          Invalid Credentials
+        </mat-error>
+        <mat-form-field hideRequiredMarker appearance="outline"> 
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="user.email" name="email" #mano='ngModel' minlength="8" autofocus required>
+         
+          <mat-error>
+            <div *ngIf="mano.invalid && (mano.dirty || mano.touched)" class="alert">
+              <div *ngIf="mano.errors?.required">
+                  Please provide a username
+              </div>
+              <div *ngIf="mano.errors?.minlength">
+                Name must be at least 4 characters long.
+              </div>
+            </div>
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field  hideRequiredMarker appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [(ngModel)]="user.password" name="password" #mano2='ngModel' required>
+          <mat-error>
+            Please provide a password
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!(mano.valid && mano2.valid)">Take me</button>
+        <br>
+        <a routerLink="/signup"><button disableRipple mat-button color="primary"> Don't have an account ?</button></a>
+      </form>
+    </mat-card-content>
+</mat-card>
+</div>

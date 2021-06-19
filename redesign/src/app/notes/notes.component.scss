@@ -1,0 +1,76 @@
+h1{
+    margin-top: 200px;
+}
+.align-right{
+    padding-right: 1rem;
+}
+.example-spacer {
+    flex: 1 1 auto;
+}
+a{
+    button{ 
+        color: red;
+    }
+}
+.note-form{
+    margin: 2em auto;
+    text-align: center;
+}
+mat-form-field{
+    width: 100%;
+    .content{
+        margin-top: 20px;
+    }
+}
+
+mat-card {
+    max-width: 50%;
+    margin: 1em auto;
+    text-align: center; 
+}
+a:hover{
+   cursor: pointer;
+}
+
+
+.invisible{
+    display: block;
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
+
+.singleNote{
+    width: 300px;
+    max-width: 300px;
+    mat-card-title{
+        font-size: 1.2em;
+        float: left;
+        display: flex;
+        align-items: center;
+        div{
+            position: absolute;
+            align-items: center;
+            right: 10px;
+            a mat-icon{
+                font-size: 1em;
+            }
+        }
+
+    }
+    mat-card-content{
+        margin: 1em auto;
+        text-align: center;
+        word-wrap: normal;
+        word-wrap: initial;
+    }
+}
+
+mat-grid-tile:nth-child(even){
+    .singleNote{
+        background-color:#f9ab0033;
+    }   
+}
+.singleNote{
+    background-color: #0000001f;
+}

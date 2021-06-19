@@ -1,0 +1,91 @@
+<div *ngIf="isLoggedIn">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+          <span>TestSigma Keep</span>
+          <span class="example-spacer"></span>
+          <span class="align-right">
+            <button mat-button disableRipple>About</button>
+          </span>
+          <span class="align-right">
+            
+          </span>
+          <span class="align-right">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </span>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>account_circle</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item disabled> 
+          <mat-icon>voicemail</mat-icon>
+          <span>Disable Alerts</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>power_settings_new</mat-icon>
+          <a href="#" (click)="logout()"> <button mat-flat-button>Logout</button></a>
+        </button>
+      </mat-menu>
+      </mat-toolbar-row>
+    </mat-toolbar>
+</div>
+<div class="note-form">
+  <mat-card>
+    <mat-card-content>
+      <form >
+        <mat-form-field *ngIf="content.dirty">
+          <input matInput placeholder="Title" [(ngModel)]="newNote.title" name="notetitle" />
+        </mat-form-field>
+        <br/>
+        <mat-form-field >
+          <textarea matInput placeholder="Take a note" maxlength="1000" [(ngModel)]="newNote.content" #content='ngModel' name="content">1600 Amphitheatre Pkwy</textarea>
+          <!-- <input matInput placeholder="Take a note"  /> -->
+        </mat-form-field>
+        <br/>
+        <mat-grid-list cols="2" rowHeight="8:1" *ngIf="content.dirty">
+          <mat-grid-tile>
+            
+            <a *ngIf="newNote.remainder" (click)="newNote.remainder=!newNote.remainder"><mat-icon aria-hidden="false" aria-label="Remainder">notifications_active</mat-icon></a>
+            <a *ngIf="!newNote.remainder" (click)="picker.open();newNote.remainder=!newNote.remainder"><mat-icon aria-hidden="false" aria-label="Remainder">notifications_disable</mat-icon></a>
+            
+            <mat-form-field class="invisible">
+              <input matInput [matDatepicker]="picker" [(ngModel)]="newNote.remainder_date" name="remainder_date" [min]="startDate"  placeholder="Input & change events">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker [startAt]="startDate"  ></mat-datepicker>
+            </mat-form-field> 
+             
+          </mat-grid-tile>
+          <mat-grid-tile>           
+            <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+          </mat-grid-tile>
+        </mat-grid-list> 
+        <br/>             
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div >
+  <mat-grid-list cols="4" rowHeight="3:1">
+    <mat-grid-tile *ngFor="let note of notes" >  
+      <mat-card class="singleNote">
+        <mat-card-title>
+            {{note.title}}
+            <div>
+              <a (click)="openDialog(note)"><mat-icon>edit</mat-icon></a>
+              <a (click)="deleteNote(note.note_id)"><mat-icon>delete</mat-icon></a>
+            </div>
+        </mat-card-title>
+        <br/><br/>
+        <mat-card-content>
+          {{note.content}}
+        </mat-card-content>
+        <mat-card-actions *ngIf="note.remainder" align="start">
+            <mat-icon  matTooltip={{note.remainder_date}} aria-hidden="false" aria-label="Remainder">notifications_active</mat-icon>
+        </mat-card-actions>
+      </mat-card>      
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<!-- <button mat-button (click)="openDialog()">Open dialog</button> -->

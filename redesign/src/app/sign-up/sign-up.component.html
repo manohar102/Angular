@@ -1,0 +1,72 @@
+<div *ngIf="user">
+  <mat-card>
+      <mat-card-content>
+        <form [formGroup]=form (ngSubmit)="onSubmit()">
+          <h2>Sign up</h2>
+          <mat-error *ngIf="loginInvalid">
+            Registration not completed...!
+          </mat-error>
+          <mat-error class="success" *ngIf="registrationCompleted">
+            Registration completed...!
+          </mat-error>
+          <mat-form-field appearance="outline"> 
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="first_name" minlength="4" name="firstname" required/>           
+            <mat-error>
+              Please provide a firstname
+              </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline"> 
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="last_name" minlength="4" name="lastname"/>           
+            <mat-error>
+              Please provide a lastname
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline"> 
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" minlength="4" name="email" required>
+           
+            <mat-error>
+              Please provide a valid Email
+              <!-- <div *ngIf="mano.invalid && (mano.dirty || mano.touched)" class="alert">
+                <div *ngIf="mano.errors?.required">
+                    Please provide a username
+                </div>
+                <div *ngIf="mano.errors?.minlength">
+                  Name must be at least 4 characters long.
+                </div>
+                <div *ngIf="mano.errors?.forbiddenName">
+                  Name cannot be Bob.
+                </div>
+              </div> -->
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field  appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" name="password" required>
+            
+            <mat-error>
+              Please provide a password
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field  appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input type="password" matInput formControlName="confirm_password" name="confirm_password" required>
+            <div *ngIf="form.errors?.passwordMisMatch && (form.touched || form.dirty)" >
+              <i class="custom-error">Password do not match</i>
+            </div>
+            <mat-error>
+              Please provide a password        
+            </mat-error>
+          </mat-form-field>
+          
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Create Account</button>
+          <br>
+          <a routerLink="/login"><button disableRipple mat-button color="primary"> Already have an account ?</button></a>
+        </form>
+      </mat-card-content>
+  </mat-card>
+</div>
