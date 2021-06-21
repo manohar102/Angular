@@ -1,0 +1,35 @@
+<div class="note-form">
+    <mat-card>
+      <mat-card-content>
+        <form >
+          <mat-form-field *ngIf="content.dirty">
+            <input matInput placeholder="Title" [(ngModel)]="newNote.title" name="notetitle" />
+          </mat-form-field>
+          <br/>
+          <mat-form-field >
+            <textarea matInput placeholder="Take a note" maxlength="1000" [(ngModel)]="newNote.content" #content='ngModel' name="content">1600 Amphitheatre Pkwy</textarea>
+            <!-- <input matInput placeholder="Take a note"  /> -->
+          </mat-form-field>
+          <br/>
+          <mat-grid-list cols="2" rowHeight="8:1" *ngIf="content.dirty">
+            <mat-grid-tile>
+              
+              <a *ngIf="newNote.remainder" (click)="newNote.remainder=!newNote.remainder"><mat-icon aria-hidden="false" aria-label="Remainder">notifications_active</mat-icon></a>
+              <a *ngIf="!newNote.remainder" (click)="picker.open();newNote.remainder=!newNote.remainder"><mat-icon aria-hidden="false" aria-label="Remainder">notifications_disable</mat-icon></a>
+              
+              <mat-form-field class="invisible">
+                <input matInput [matDatepicker]="picker" [(ngModel)]="newNote.remainder_date" name="remainder_date" [min]="startDate"  placeholder="Input & change events">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker [startAt]="startDate"  ></mat-datepicker>
+              </mat-form-field> 
+               
+            </mat-grid-tile>
+            <mat-grid-tile>           
+              <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+            </mat-grid-tile>
+          </mat-grid-list> 
+          <br/>             
+        </form>
+      </mat-card-content>
+    </mat-card>
+</div>

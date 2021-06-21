@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators, FormControl  } from '@angular/forms';
-import { User } from '../user';
+import { User } from '../../../user';
 import { AbstractControl } from '@angular/forms';
 import { ValidationErrors } from '@angular/forms';
 import { ValidatorFn } from '@angular/forms';
-import { UserLoginServiceService } from '../user-login-service.service';
+import { UserLoginServiceService } from '../../../user-login-service.service';
 import { delay, first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class UserSignUpFormComponent implements OnInit {
 
   form: FormGroup;
   public loginInvalid = false;

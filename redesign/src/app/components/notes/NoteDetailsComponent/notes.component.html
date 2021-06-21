@@ -1,0 +1,27 @@
+<div *ngIf="isLoggedIn">
+    <app-navbar-component></app-navbar-component>
+    <app-note-form [currentUserId]="this.currentUserId" [getNotesFunction]="getNotesCallBackFunction"></app-note-form>
+</div>
+<div >
+  <mat-grid-list cols="4" rowHeight="3:1">
+    <mat-grid-tile *ngFor="let note of notes" >  
+      <mat-card class="singleNote">
+        <mat-card-title>
+            {{note.title}}
+            <div>
+              <a (click)="openDialog(note)"><mat-icon>edit</mat-icon></a>
+              <a (click)="deleteNote(note.note_id)"><mat-icon>delete</mat-icon></a>
+            </div>
+        </mat-card-title>
+        <br/><br/>
+        <mat-card-content>
+          {{note.content}}
+        </mat-card-content>
+        <mat-card-actions *ngIf="note.remainder" align="start">
+            <mat-icon  matTooltip={{note.remainder_date}} aria-hidden="false" aria-label="Remainder">notifications_active</mat-icon>
+        </mat-card-actions>
+      </mat-card>      
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<!-- <button mat-button (click)="openDialog()">Open dialog</button> -->

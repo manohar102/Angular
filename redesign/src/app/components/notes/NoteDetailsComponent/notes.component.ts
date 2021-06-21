@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLoginServiceService } from '../user-login-service.service';
+import { UserLoginServiceService } from '../../../user-login-service.service';
 import { Router } from '@angular/router';
-import { INote, Note } from '../note';
-import { User } from '../user';
-import { NoteserviceService } from '../noteservice.service';
+import { INote, Note } from '../../../note';
+import { User } from '../../../user';
+import { NoteserviceService } from '../../../noteservice.service';
 import { MatDialog } from '@angular/material/dialog';
-import { EditNoteComponent } from '../edit-note/edit-note.component';
+import { EditNoteDialogComponent } from '../EditNoteDialogComponent/edit-note.component';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -13,15 +13,14 @@ import { first } from 'rxjs/operators';
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements OnInit {
+export class NotesDetailsComponent implements OnInit {
 
   public isLoggedIn = false;
   public startDate= new Date();
   public setRemainder = false;
   private user: User;
-  private currentUserId:number = 0;
+  public currentUserId:number = 0;
   
-  newNote: Note = new Note(0,'','',this.startDate,false,this.startDate,0);
   notes: INote[] =[]
   
   constructor(private auth:UserLoginServiceService,
@@ -50,19 +49,16 @@ export class NotesComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  onSubmit(){
-    this.noteService.saveNote(this.newNote,this.currentUserId).pipe(first()).subscribe({
-      next:(data)=> {console.log("Submitted"+data);this.getNotes(this.currentUserId)},
-      error:(err)=>{console.log("Error"+err.status)}
-    });
-  }
-
   getNotes(uid:number){
     this.noteService.getNote(uid).pipe(first()).subscribe({
       next:(data) => { this.notes=data},
       error:(err)=>{console.log("Error"+err.status)}
     });
     console.log(this.notes);
+  }
+
+  getNotesCallBackFunction = (args:any): void =>{
+    this.getNotes(this.currentUserId);
   }
 
   deleteNote(nid:number){
@@ -73,7 +69,7 @@ export class NotesComponent implements OnInit {
   }
 
   openDialog(note:Note) {
-    const dialogRef = this.dialog.open(EditNoteComponent, {
+    const dialogRef = this.dialog.open(EditNoteDialogComponent, {
       data: note,
       height: '400px',
       width: '600px',

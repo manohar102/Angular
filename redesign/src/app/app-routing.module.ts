@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { NotesComponent } from './notes/notes.component';
+import { UserSignInFormComponent } from './components/users/UserSignInFormComponent/sign-in.component';
+import { UserSignUpFormComponent } from './components/users/UserSignUpFormComponent/sign-up.component';
+import { NotesDetailsComponent } from './components/notes/NoteDetailsComponent/notes.component';
 
 const routes: Routes = [
   {path:"",redirectTo:"/login",pathMatch:"full"},
-  {path:"login",component:SignInComponent},
-  {path:"signup",component:SignUpComponent},
-  {path:"notes",component:NotesComponent}
+  {path:"login",component:UserSignInFormComponent},
+  {path:"signup",component:UserSignUpFormComponent},
+  {path:"notes",component:NotesDetailsComponent}
 ];
 
 @NgModule({

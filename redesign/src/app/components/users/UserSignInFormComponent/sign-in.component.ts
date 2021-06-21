@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { User } from '../user';
+import { User } from '../../../user';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserLoginServiceService } from '../user-login-service.service';
+import { UserLoginServiceService } from '../../../user-login-service.service';
 import { delay, first } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +11,7 @@ import { delay, first } from 'rxjs/operators';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent implements OnInit {
+export class UserSignInFormComponent implements OnInit {
 
   public loginInvalid = false;
   private formSubmitAttempt = false;

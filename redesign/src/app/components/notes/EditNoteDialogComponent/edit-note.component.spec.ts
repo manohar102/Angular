@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignInComponent } from './sign-in.component';
+import { EditNoteDialogComponent } from './edit-note.component';
 
-describe('SignInComponent', () => {
-  let component: SignInComponent;
-  let fixture: ComponentFixture<SignInComponent>;
+describe('EditNoteDialogComponent', () => {
+  let component: EditNoteDialogComponent;
+  let fixture: ComponentFixture<EditNoteDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignInComponent ]
+      declarations: [ EditNoteDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignInComponent);
+    fixture = TestBed.createComponent(EditNoteDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
