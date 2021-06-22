@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLoginServiceService } from '../../../user-login-service.service';
+import { UserLoginServiceService } from '../../../services/user-login-service.service';
 import { Router } from '@angular/router';
-import { INote, Note } from '../../../note';
-import { User } from '../../../user';
-import { NoteserviceService } from '../../../noteservice.service';
+import { INote, Note } from '../../../models/note';
+import { User } from '../../../models/user';
+import { NoteserviceService } from '../../../services/noteservice.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditNoteDialogComponent } from '../EditNoteDialogComponent/edit-note.component';
 import { first } from 'rxjs/operators';

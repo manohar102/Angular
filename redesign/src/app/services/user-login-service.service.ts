@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { User } from './user';
+import { User } from '../models/user';
 import { BehaviorSubject,Observable,of,throwError } from 'rxjs';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Pipe } from '@angular/compiler/src/core';
 import { catchError, map, tap } from 'rxjs/operators';
+import { JwtResponseModel } from '../models/jwt-response-model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class UserLoginServiceService {
     console.log(this.currentUser,this.currentUserSubject.value);
   }
 
-  public get currentUserValue(): User {
+  public get currentUserValue(): JwtResponseModel {
       return this.currentUserSubject.value;
   }
 
@@ -36,13 +37,13 @@ export class UserLoginServiceService {
     //   console.log(this.currentUser,this.currentUserSubject.value);
     //   return user;
     // }
-    const url = `${this.server}`+"login";
+    const url = `${this.server}`+"authenticate";
     return this.httpClient.post(url,user).
         pipe(
            map((data: any) => {
              console.log("maaa-->",data);
             localStorage.setItem("isLoggedIn", JSON.stringify(data));
-            sessionStorage.setItem("mano",JSON.stringify(data));
+            sessionStorage.setItem("JwtSession",JSON.stringify(data));
             this.currentUserSubject.next(data);
             return data;
            }), 
@@ -68,7 +69,7 @@ export class UserLoginServiceService {
 
 
   logout(){
-    sessionStorage.removeItem("mano");
+    sessionStorage.removeItem("JwtSession");
     localStorage.removeItem("isLoggedIn");
     this.currentUserSubject.next(JSON.parse('0'));
   }

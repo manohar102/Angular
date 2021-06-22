@@ -1,4 +1,4 @@
-import { INote } from "src/app/note";
+import { INote } from "src/app/models/note";
 
 export const NOTES: INote[]=[
     {note_id:1,title:"Welcome note",content:"Need to complete the project",remainder_date:new Date(),created_date:new Date(),remainder:true,uid:1},

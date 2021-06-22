@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { INote, Note } from '../../../note';
+import { INote, Note } from '../../../models/note';
 import { ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 @Component({

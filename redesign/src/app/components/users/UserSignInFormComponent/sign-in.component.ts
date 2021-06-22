@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { User } from '../../../user';
+import { User } from '../../../models/user';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserLoginServiceService } from '../../../user-login-service.service';
+import { UserLoginServiceService } from '../../../services/user-login-service.service';
 import { delay, first } from 'rxjs/operators';
 
 @Component({

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { INote, Note } from './note';
+import { INote, Note } from '../models/note';
 import { NOTES } from 'note_details';
 
 import { BehaviorSubject,Observable,of,throwError } from 'rxjs';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Pipe } from '@angular/compiler/src/core';
 import { catchError, map, tap } from 'rxjs/operators';
+import { UserLoginServiceService } from './user-login-service.service';
+import { JwtResponseModel } from '../models/jwt-response-model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,17 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class NoteserviceService {
 
   private server="http://127.0.0.1:8080/"
+  private jwtTokenModel:JwtResponseModel; 
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient,private auth:UserLoginServiceService) {
+        this.jwtTokenModel = this.auth.currentUserValue;
+   }
+
+ 
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Authetication': 'Bearer' })
+  };
 
   saveNote(note:Note,uid:number){
     console.log("Service Note:",note);

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { Note } from 'src/app/note';
-import { NoteserviceService } from 'src/app/noteservice.service';
+import { Note } from 'src/app/models/note';
+import { NoteserviceService } from 'src/app/services/noteservice.service';
 
 @Component({
   selector: 'app-note-form',
