@@ -11,13 +11,13 @@ import { JwtResponseModel } from '../models/jwt-response-model';
 })
 export class UserLoginServiceService {
 
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  private currentUserSubject: BehaviorSubject<JwtResponseModel>;
+  public currentUser: Observable<JwtResponseModel>;
 
   private server="http://127.0.0.1:8080/"
 
   constructor(private httpClient:HttpClient) { 
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem("isLoggedIn")|| '0'));
+    this.currentUserSubject = new BehaviorSubject<JwtResponseModel>(JSON.parse(localStorage.getItem("isLoggedIn")|| '0'));
     this.currentUser = this.currentUserSubject.asObservable();
     console.log(this.currentUser,this.currentUserSubject.value);
   }

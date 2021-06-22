@@ -16,20 +16,24 @@ export class NoteserviceService {
 
   private server="http://127.0.0.1:8080/"
   private jwtTokenModel:JwtResponseModel; 
+  private token:string = "Bearer ";
 
   constructor(private httpClient:HttpClient,private auth:UserLoginServiceService) {
         this.jwtTokenModel = this.auth.currentUserValue;
+        if(this.jwtTokenModel){
+          this.token.concat(this.jwtTokenModel.token);
+        }        
    }
 
  
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Authetication': 'Bearer' })
+    headers: new HttpHeaders({ "Authetication" : this.token })
   };
 
   saveNote(note:Note,uid:number){
     console.log("Service Note:",note);
-    const url = `${this.server}notes/${uid}/save`;
+    const url = `${this.server}notes/${uid}`;
     console.log(url);
     return this.httpClient.post(url,note).
         pipe(
@@ -44,8 +48,8 @@ export class NoteserviceService {
 
   getNote(uid:number):Observable<INote[]>{
     console.log("Service_Login",uid);
-    const url = `${this.server}notes/getNotes/${uid}`;
-    return this.httpClient.get<INote[]>(url).
+    const url = `${this.server}notes/${uid}`;
+    return this.httpClient.get<INote[]>(url,this.httpOptions).
         pipe(
           map((data: any) => {
             console.log(data.notes);
@@ -62,7 +66,7 @@ export class NoteserviceService {
   }
 
   deleteNote(uid:number, nid:number){
-    const url = `${this.server}/notes/delete/${uid}/${nid}`;
+    const url = `${this.server}/notes/${uid}/${nid}`;
     return this.httpClient.delete(url).
         pipe(
           map((data: any) => {

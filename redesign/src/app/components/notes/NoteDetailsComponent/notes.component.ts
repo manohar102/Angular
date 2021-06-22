@@ -7,6 +7,7 @@ import { NoteserviceService } from '../../../services/noteservice.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditNoteDialogComponent } from '../EditNoteDialogComponent/edit-note.component';
 import { first } from 'rxjs/operators';
+import { JwtResponseModel } from 'src/app/models/jwt-response-model';
 
 @Component({
   selector: 'app-notes',
@@ -18,7 +19,8 @@ export class NotesDetailsComponent implements OnInit {
   public isLoggedIn = false;
   public startDate= new Date();
   public setRemainder = false;
-  private user: User;
+  // private user: User;
+  private jwtTokenModel:JwtResponseModel; 
   public currentUserId:number = 0;
   
   notes: INote[] =[]
@@ -28,11 +30,11 @@ export class NotesDetailsComponent implements OnInit {
     private router:Router,
     public dialog: MatDialog) 
   { 
-    this.user = this.auth.currentUserValue
-    if (this.user) { 
+    this.jwtTokenModel = this.auth.currentUserValue
+    if (this.jwtTokenModel) { 
       this.isLoggedIn=true;
-      console.log("--->",this.user);
-      this.currentUserId=this.user.uid;
+      console.log("--->",this.jwtTokenModel);
+      this.currentUserId=this.jwtTokenModel.uid;
     }
     else{
       this.router.navigate(['/']);
